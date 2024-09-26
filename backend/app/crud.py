@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
-from models import *
-from schemas import *
+import models
+import schemas
+import crud
 from auth import get_password_hash
 
 def get_user(db: Session, user_id: int):

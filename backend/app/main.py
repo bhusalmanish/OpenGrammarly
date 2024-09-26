@@ -3,10 +3,10 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from typing import List
 
-from crud import *
-from models import *
-from auth import *
-from schemas import *
+import models
+import schemas
+import crud
+import auth
 from database import SessionLocal, engine
 from grammar_correction import correct_grammar, check_grammar
 
