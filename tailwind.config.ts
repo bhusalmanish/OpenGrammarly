@@ -8,12 +8,23 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Setting default colors
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "#ffffff", // Default background color: white
+        text: "#000000", // Default text color: black
+        primary: {
+          DEFAULT: "#48bb78", // Primary color: green-500
+        },
+        secondary: {
+          DEFAULT: "#68d391", // Secondary color: green-400
+        },
+      },
+      backgroundImage: {
+        'custom-image': "url('/logo.png')",
       },
     },
   },
   plugins: [],
 };
+
 export default config;
