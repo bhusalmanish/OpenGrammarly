@@ -34,3 +34,41 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## Backend Setup
+Prerequisites
+- Python 3.8+
+- SQLlite (or any SQLAlchemy-supported database)
+
+## Installation
+Clone the repository:
+
+            git clone <repository-url>
+            cd <repository-directory>
+
+### Create and activate a virtual environment:
+
+            python -m venv venv
+            venv\Scripts\activate
+
+### Install dependencies:
+
+If using pip:
+
+        pip install -r req.txt
+
+## Run the backend server:
+
+            uvicorn main:app --reload
+
+The backend will be available at http://127.0.0.1:8000.
+
+## Key Endpoints
+- User Registration: POST /users/
+- User Login: POST /token
+- Correct Grammar: POST /correct-grammar/
+- Get Users (Admin): GET /users/
+- Delete User (Admin): DELETE /users/{user_id}
+- Read Corrections (Admin): GET /corrections/
+
