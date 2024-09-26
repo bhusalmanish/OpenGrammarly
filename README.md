@@ -38,6 +38,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Backend Setup
 Prerequisites
+
 - Python 3.8+
 - SQLlite (or any SQLAlchemy-supported database)
 
