@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
-from .auth import get_password_hash
+from models import *
+from schemas import *
+from auth import get_password_hash
 
 def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()

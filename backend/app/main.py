@@ -79,3 +79,4 @@ async def delete_user(user_id: int, current_user: schemas.User = Depends(auth.ge
 async def read_corrections(skip: int = 0, limit: int = 100, current_user: schemas.User = Depends(auth.get_current_admin_user), db: Session = Depends(get_db)):
     corrections = crud.get_corrections(db, skip=skip, limit=limit)
     return corrections
+

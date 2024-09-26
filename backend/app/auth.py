@@ -5,7 +5,9 @@ from passlib.context import CryptContext
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-from . import crud, models, schemas
+from models import *
+from schemas import *
+from crud import *
 from .database import SessionLocal
 
 SECRET_KEY = "AJNG"  # Change this to a secure random string
