@@ -5,6 +5,10 @@ import pickle as pkl
 import re
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+from model.NB import NaiveBayesTextClassifier
+
+
 
 stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
@@ -13,8 +17,12 @@ lemmatizer = WordNetLemmatizer()
 gf = Gramformer(models=1, use_gpu=False)  # 1 for grammar correction
 
 # Load the pre-trained classifier and scaler
-loaded_classifier = pkl.load('models/classifier.pkl')
-scaler = pkl.load('models/scaler.pkl')
+
+with open('models/naivebayes.pkl', 'rb') as f:
+    loaded_classifier = pkl.load(f)
+
+with open('models/scaler.pkl', 'rb') as f:
+    scaler = pkl.load(f)
 
 def clean_text(text):
     # Lowercasing
@@ -47,7 +55,7 @@ def check_grammar(text: str) -> tuple:
     corrected_texts = gf.correct(text)
 
     # If corrected_texts is a set, convert it to a list
-    corrected_text = list(corrected_texts)[0] if corrected_texts else input_text
+    corrected_text = list(corrected_texts)[0] if corrected_texts else text
 
     # Clean the corrected text
     cleaned_corrected_text = clean_text(corrected_text)
