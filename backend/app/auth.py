@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from models import *
 from schemas import *
 from crud import *
-from .database import SessionLocal
+from database import SessionLocal
 
 SECRET_KEY = "AJNG"  # Change this to a secure random string
 ALGORITHM = "HS256"
