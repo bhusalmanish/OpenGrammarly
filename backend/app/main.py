@@ -3,12 +3,14 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from typing import List
 
+from model.NB import NaiveBayesTextClassifier
+import uvicorn
 import models
 import schemas
 import crud
 import auth
 from database import SessionLocal, engine
-from grammar_correction import correct_grammar, check_grammar
+from grammar_correction import  check_grammar
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -80,3 +82,5 @@ async def read_corrections(skip: int = 0, limit: int = 100, current_user: schema
     corrections = crud.get_corrections(db, skip=skip, limit=limit)
     return corrections
 
+if __name__ == "__main__" : 
+    uvicorn.run(app) 

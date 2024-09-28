@@ -10,8 +10,8 @@ import AboutPage from '../about/page';
 import SettingsPage from '../setting/page';
 
 export default function Page() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [currentPage, setCurrentPage] = useState('grammar-correct'); // Default page
+    const [isOpen, setIsOpen] = useState(true);
+    const [currentPage, setCurrentPage] = useState('grammar-correct');
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
@@ -44,14 +44,15 @@ export default function Page() {
                     {renderPage()}
                 </div>
             </div>
-            <div
+            {/* <div
                 className="absolute inset-0 bg-articon bg-repeat bg-cover bg-center -z-10"
                 style={{
                     backgroundImage: `url(/logo.png)`,
                     backgroundSize: 20,
                     opacity: 0.1,
                 }}
-            />
+            /> */}
         </div>
+
     );
 }

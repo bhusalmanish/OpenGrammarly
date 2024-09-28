@@ -18,7 +18,7 @@ const GrammarCorrectPage = () => {
         // You can replace the console.log with your API call or function to check grammar
     };
     return (
-        <div className=" bg-white px-2 m-0  pl-3 w-full min-h-[90vh] " >
+        <div className=" bg-white px-2 m-0  pl-3 w-[60vw] min-h-[90vh] " >
 
             <p className=" text-[24px] font-bold mb-10 mt-4">Hello ! Manish</p>
 
