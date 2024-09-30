@@ -2,6 +2,8 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from typing import List
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from model.NB import NaiveBayesTextClassifier
 import uvicorn
@@ -16,6 +18,14 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Ensure this matches your frontend origin
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Dependency
 def get_db():
     db = SessionLocal()
@@ -25,6 +35,7 @@ def get_db():
         db.close()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
 
 @app.post("/token", response_model=schemas.Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
@@ -37,6 +48,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         )
     access_token = auth.create_access_token(data={"sub": user.email})
     return {"access_token": access_token, "token_type": "bearer"}
+
 
 @app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
@@ -81,6 +93,7 @@ async def delete_user(user_id: int, current_user: schemas.User = Depends(auth.ge
 async def read_corrections(skip: int = 0, limit: int = 100, current_user: schemas.User = Depends(auth.get_current_admin_user), db: Session = Depends(get_db)):
     corrections = crud.get_corrections(db, skip=skip, limit=limit)
     return corrections
+
 
 if __name__ == "__main__" : 
     uvicorn.run(app) 

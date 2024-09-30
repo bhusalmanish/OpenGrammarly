@@ -1,17 +1,49 @@
 "use client";
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
+
 
 // Import the content components
 // Adjust the path as needed
+
 import Navbar from '@/Components/navbar';
 import Sidebar from '@/Components/sidebar';
 import GrammarCorrectPage from '../grammar-check/page';
 import AboutPage from '../about/page';
 import SettingsPage from '../setting/page';
+import { isAuthenticated, isTokenExpired } from '@/services/authService';
+import { useRouter } from 'next/navigation';
+// import router, { useRouter } from 'next/router';
 
 export default function Page() {
     const [isOpen, setIsOpen] = useState(true);
     const [currentPage, setCurrentPage] = useState('grammar-correct');
+
+
+    const router = useRouter();
+
+    // useEffect(() => {
+    //     const token = localStorage.getItem('token');
+    //     if (isTokenExpired(token)) {
+    //         setErrorMessage('Session expired. Please log in again.');
+    //         { !errorMessage ?? alert(errorMessage) }
+    //         setTimeout(() => {
+    //             router.push('/login');
+    //         }, 2000);
+    //     }
+    // }, [router]);
+
+
+
+
+    useEffect(() => {
+        if (!isAuthenticated()) {
+            router.push('/login');
+        }
+    }, [router]);
+
+
+
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
@@ -44,14 +76,6 @@ export default function Page() {
                     {renderPage()}
                 </div>
             </div>
-            {/* <div
-                className="absolute inset-0 bg-articon bg-repeat bg-cover bg-center -z-10"
-                style={{
-                    backgroundImage: `url(/logo.png)`,
-                    backgroundSize: 20,
-                    opacity: 0.1,
-                }}
-            /> */}
         </div>
 
     );
